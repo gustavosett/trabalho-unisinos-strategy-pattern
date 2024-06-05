@@ -1,0 +1,16 @@
+@startuml
+
+[*] -> Disponível
+
+Disponível -> Emprestado : retirar
+Emprestado -> Disponível : entregar
+Emprestado -> Atrasado : dataEntregaPrevista < dataAtual
+Atrasado -> Disponível : entregar e pagarMulta
+Atrasado -> Emprestado : pagarMulta
+Disponível -> Reservado : reservar
+Reservado -> Disponível : cancelarReserva
+Emprestado -> EmInspeção : contadorEmprestimos % 15 == 0
+EmInspeção -> Disponível : finalizarInspeção
+EmInspeção -> Reservado : finalizarInspeção e existeReserva
+
+@enduml

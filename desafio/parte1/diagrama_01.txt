@@ -1,0 +1,54 @@
+@startuml
+!theme aws-orange
+interface CalculadoraFrete {
+  calcularFrete(Exemplar exemplar, Endereco endereco): double
+}
+
+class CalculadoraFreteA implements CalculadoraFrete {
+}
+
+class CalculadoraFreteB implements CalculadoraFrete {
+}
+
+class CalculadoraFreteC implements CalculadoraFrete {
+}
+
+class CalculadoraFreteD implements CalculadoraFrete {
+}
+
+class Emprestimo {
+  - dataRetirada: Date
+  - dataEntregaPrevista: Date
+  - dataEntregaRealizada: Date
+  - calculadoraFrete: CalculadoraFrete
+  + calcularFrete(): double
+}
+
+class Exemplar {
+  - codigo: int
+  - dimensoes: double[]
+  - peso: double
+}
+
+class Livro {
+  - titulo: String
+  - autor: String
+}
+
+class Usuario {
+  - codigo: int
+  - nome: String
+}
+
+class Endereco {
+  - numero: int
+  - rua: String
+  - cidade: String
+}
+
+Exemplar "1..*" -- "1" Livro
+Exemplar "1" -- "1..*" Emprestimo
+Usuario "1" -- "1" Emprestimo
+Usuario "1" -- "1" Endereco
+Emprestimo "1" -- "1" CalculadoraFrete
+@enduml
